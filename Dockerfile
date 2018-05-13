@@ -16,15 +16,15 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 	export LANG=${DEFAULT_LOCALE}.UTF-8
 
 RUN apt-get update && \
-	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C && \
-	apt-get install -y software-properties-common && \
+	#apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C && \
+	apt-get install -y --force-yes software-properties-common && \
 	NGINX=stable && \
 	add-apt-repository ppa:nginx/${NGINX_VERSION} && \
 	add-apt-repository ppa:ondrej/php && \
 	apt-get update && \
-	apt-get upgrade -y && \
-	BUILD_PACKAGES="supervisor nginx php5.6-fpm git php5.6-mysql php-apc php5.6-curl php5.6-gd php5.6-intl php5.6-mcrypt php5.6-mbstring php5.6-memcache php5.6-memcached php5.6-sqlite php5.6-tidy php5.6-xmlrpc php5.6-xsl php5.6-pgsql php5.6-mongo php5.6-ldap pwgen php5.6-cli curl memcached ssmtp" && \
-	apt-get -y install $BUILD_PACKAGES && \
+	apt-get upgrade -y --force-yes && \
+	BUILD_PACKAGES="supervisor nginx php5.6-fpm git php5.6-mysql php-apc php5.6-curl php5.6-gd php5.6-intl php5.6-mcrypt php5.6-mbstring php5.6-memcache php5.6-memcached php5.6-sqlite php5.6-tidy php5.6-xmlrpc php5.6-xsl php5.6-pgsql php5.6-mongo php5.6-ldap php5.6-xdebug php5.6-soap pwgen php5.6-cli curl memcached ssmtp" && \
+	apt-get -y --force-yes install $BUILD_PACKAGES && \
 	apt-get remove --purge -y software-properties-common && \
 	apt-get autoremove -y && \
 	apt-get clean && \
@@ -71,6 +71,8 @@ RUN sed -i -e "s/;listen.mode = 0660/listen.mode = 0750/g" /etc/php/5.6/fpm/pool
 	# create workdir directory
 	mkdir -p /var/www
 
+COPY ./config/php/xdebug.ini /etc/php/5.6/mods-available/xdebug.ini
+COPY ./config/php/soap.ini /etc/php/5.6/mods-available/soap.ini
 COPY ./config/nginx/nginx.conf /etc/nginx/sites-available/default.conf
 # Supervisor Config
 COPY ./config/supervisor/supervisord.conf /etc/supervisord.conf
