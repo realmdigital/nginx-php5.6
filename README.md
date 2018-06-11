@@ -1,14 +1,14 @@
 # Docker nginx + php5.6 container
 
-Docker container based on `Ubuntu 14.04.5` version. Using `nginx stable` version with `php 5.6`. This is simple container for my own personally purpose. If you have an idea how to improve it, contact me <donatas@navidonskis.com>.
+Docker container based on `Ubuntu 14.04.5` version. Using `nginx stable` version with `php 5.6`. This is simple container for my own personally purpose. If you have an idea how to improve it, raise a GitHub issue.
 
-Need PHP 7.1 ? [https://github.com/navidonskis/nginx-php7.1](https://github.com/navidonskis/nginx-php7.1).
+Need PHP 7.1 ? [https://github.com/realmdigital/nginx-php7.1](https://github.com/realmdigital/nginx-php7.1).
 
 ## Includes packages
 
  * nginx, ssmtp, memcached, curl, pwgen, supervisor
  * git, composer
- * php 5.6 (fpm, cli, mysql, apc, curl, gd, intl, mcrypt, mbstring, memcache, memcached, sqlite, tidy, xmlrpc, xsl, pgsql, mongo, ldap)
+ * php 5.6 (fpm, cli, mysql, apc, curl, gd, intl, mcrypt, mbstring, memcache, memcached, sqlite, tidy, xmlrpc, xsl, pgsql, mongo, ldap, soap, xdebug)
 
 ## Usage
 
@@ -16,7 +16,7 @@ Creating container via `docker-compose` file.
 
 ```yaml
   web:
-    image: navidonskis/nginx-php5.6
+    image: realmdigital/nginx-php5.6
     container_name: web
     restart: always
     volumes:
