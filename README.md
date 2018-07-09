@@ -2,7 +2,7 @@
 
 Docker container based on `Ubuntu 14.04.5` version. Using `nginx stable` version with `php 5.6`. This is simple container for my own personally purpose. If you have an idea how to improve it, raise a GitHub issue.
 
-Need PHP 7.1 ? [https://github.com/realmdigital/nginx-php7.1](https://github.com/realmdigital/nginx-php7.1).
+Need PHP 7.x ? [https://github.com/realmdigital/nginx-php7.x](https://github.com/realmdigital/nginx-php7.x).
 
 ## Includes packages
 

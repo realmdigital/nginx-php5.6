@@ -23,7 +23,7 @@ RUN apt-get update && \
 	add-apt-repository ppa:ondrej/php && \
 	apt-get update && \
 	apt-get upgrade -y --force-yes && \
-	BUILD_PACKAGES="supervisor nginx php5.6-fpm git php5.6-mysql php-apc php5.6-curl php5.6-gd php5.6-intl php5.6-mcrypt php5.6-mbstring php5.6-memcache php5.6-memcached php5.6-sqlite php5.6-tidy php5.6-xmlrpc php5.6-xsl php5.6-pgsql php5.6-mongo php5.6-ldap php5.6-xdebug php5.6-soap pwgen php5.6-cli curl memcached ssmtp" && \
+	BUILD_PACKAGES="nano supervisor nginx php5.6-fpm git php5.6-mysql php-apc php5.6-curl php5.6-gd php5.6-intl php5.6-mcrypt php5.6-mbstring php5.6-memcache php5.6-memcached php5.6-sqlite php5.6-tidy php5.6-xmlrpc php5.6-xsl php5.6-pgsql php5.6-mongo php5.6-ldap php5.6-xdebug php5.6-soap pwgen php5.6-cli curl memcached ssmtp" && \
 	apt-get -y --force-yes install $BUILD_PACKAGES && \
 	apt-get remove --purge -y software-properties-common && \
 	apt-get autoremove -y && \
@@ -54,6 +54,7 @@ RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/5.6/fpm/php.
 	sed -i -e "s/pm.start_servers = 2/pm.start_servers = 3/g" /etc/php/5.6/fpm/pool.d/www.conf && \
 	sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" /etc/php/5.6/fpm/pool.d/www.conf && \
 	sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 4/g" /etc/php/5.6/fpm/pool.d/www.conf && \
+	sed -i -e "s/;clear_env = no/clear_env = no/g" /etc/php/5.6/fpm/pool.d/www.conf && \
 	sed -i -e "s/pm.max_requests = 500/pm.max_requests = 200/g" /etc/php/5.6/fpm/pool.d/www.conf && \
 	sed -i "s/;date.timezone =.*/date.timezone = Europe\/Vilnius/" /etc/php/5.6/fpm/php.ini && \
 	sed -i "s/;date.timezone =.*/date.timezone = Europe\/Vilnius/" /etc/php/5.6/cli/php.ini
